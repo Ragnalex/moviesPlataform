@@ -1,7 +1,7 @@
 .background-general {
   height: 58.15rem;
   width: 117.41rem;
-  background-color: #4b306b;
+  background-color: #2a1b3d;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,8 +9,8 @@
 
 .bg-modal {
   background-color: white;
-  height: 300px;
-  width: 1000px;
+  height: 50%;
+  width: 60%;
   display: flex;
   justify-content: center;
   align-items: center;

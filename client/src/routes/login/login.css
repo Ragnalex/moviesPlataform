@@ -1,0 +1,17 @@
+.login-container {
+    width: 100%;
+    height: 100%;
+    padding: 2.25rem;
+}
+.login-header {
+    margin: 1.5rem;
+    font-size: 2.375rem;
+    text-align: center;
+}
+.login-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    height: 60%; 
+    width: 100%;
+}
