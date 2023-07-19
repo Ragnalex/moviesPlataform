@@ -32,13 +32,13 @@ const Login = () => {
 
     return(
         <div className="login-container">
-            <div className="login-header">
+            <div className="header-tittle">
                 Inicio de sesión
             </div>
             <div className="login-body">
                 <form onSubmit={handleSubmit}>
                     <Box 
-                        sx={{display: "flex", flexDirection: "column", width: "50%"}}
+                        sx={{display: "flex", flexDirection: "column"}}
                         component="form"
                         autoComplete="off"
                     >
