@@ -1,6 +1,6 @@
 .background-general {
-  height: 58.2rem;
-  width: 120rem;
+  height: 58.218rem;
+  width: 117.44rem;
   background-color: #2a1b3d;
   display: flex;
   justify-content: center;
@@ -10,9 +10,9 @@
 .bg-modal {
   background-color: white;
   max-width: 70%;
-  max-height: 95%;
-  overflow-y: auto;
+  max-height: 80%;
   display: flex;
+  padding: 30px;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
@@ -21,6 +21,10 @@
   margin: 1.5rem;
   font-size: 2.375rem;
   text-align: center;
+}
+.table-container{
+  max-height: 700px;
+  overflow-y: auto;
 }
 
 @media(min-width: 1280px) and (max-width: 1360px) {
@@ -31,7 +35,10 @@
 }
 @media(min-width: 1366px) and (max-width: 1440px){
   .background-general {
-    height: 48.75rem;
+    height: 52.75rem;
     width: 85.375rem;
+  }
+  .table-container {
+    max-height: 500px;
   }
 }
