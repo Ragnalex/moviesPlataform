@@ -74,7 +74,7 @@ const MovieTable = () => {
                     <TableBody sx={{overflowY: "auto"}}>
                         {dataMovies.map((movie, index) => {
                             return(
-                                <TableRow>
+                                <TableRow key={index}>
                                     <TableCell>{index+1}</TableCell>
                                     <TableCell>{movie.titulo}</TableCell>
                                     <TableCell>{movie.descripcion}</TableCell>

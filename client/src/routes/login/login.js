@@ -13,12 +13,14 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("/api/login", {
+      const response = await axios.post("http://localhost:5000/api/login", {
         username: user,
         password: pass,
       });
 
       if (response.data.success) {
+        console.log(response.data.data[0].id);
+        localStorage.setItem("userID", response.data.data[0].id);
         alert("Acceso correcto!");
         navigate(`/home`);
       } else {
