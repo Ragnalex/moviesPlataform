@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const db = require('./index'); // Importa la configuración de la conexión con OrientDB
 const app = express();
 
 // Middleware para manejar datos JSON
+app.use(cors());
 app.use(express.json());
 
 // Endpoint de prueba
@@ -16,12 +18,12 @@ app.post('/api/login', async (req, res) => {
 
   try {
     // Realiza una consulta para verificar el nombre de usuario y contraseña
-    const query = `SELECT FROM Users WHERE username = '${username}' AND password = '${password}'`;
+    const query = `SELECT FROM Users WHERE name = '${username}' AND pass = '${password}'`;
     const user = await db.query(query);
 
     if (user.length === 1) {
       // El inicio de sesión fue exitoso
-      res.json({ success: true, message: 'Inicio de sesión exitoso' });
+      res.status(200).send({ success: true, message: 'Inicio de sesión exitoso', data: user });
     } else {
       // El inicio de sesión falló (credenciales inválidas)
       res.status(401).json({ success: false, message: 'Credenciales inválidas' });
@@ -38,17 +40,33 @@ app.get('/api/users/:userId/movies', async (req, res) => {
 
   try {
     // Realiza una consulta para obtener las películas vistas por el usuario
-    const query = `SELECT expand(both('Viewed')) FROM Users WHERE userId = '${userId}'`;
+    const query = `SELECT expand(both('rated')) FROM Users WHERE id = '${userId}' ORDER BY rate DESC`;
     const movies = await db.query(query);
 
-    res.json(movies);
+    res.status(200).send({data: movies});
   } catch (error) {
     console.error('Error al obtener las películas vistas por el usuario:', error);
-    res.status(500).json({ error: 'Error al obtener las películas vistas por el usuario' });
+    res.status(500).send({ error: 'Error al obtener las películas vistas por el usuario' });
   }
 });
 
-const port = 3000;
+app.get('/api/genre/:title', async (req, res) => {
+  const { title } = req.params;
+  try {
+    const genres = await db.query(`SELECT title AS pelicula, list(description) AS generos 
+                                  FROM ( TRAVERSE out("hasGenera") FROM (SELECT FROM movies WHERE title = "${title}") ) 
+                                  WHERE @class = 'Genres'`);
+    if (genres) {
+      res.status(200).send({data: genres})
+    }
+    else res.status(500).send({error: "No encontrado"});
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({error: "Error"});
+  }
+});
+
+const port = 5000;
 app.listen(port, () => {
   console.log(`Servidor en ejecución en http://localhost:${port}`);
 });

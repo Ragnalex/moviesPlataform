@@ -6,17 +6,17 @@ const orientDB = require('orientjs');
 
 const serv = orientDB({
     host: 'localhost',
-    port: 2480,
+    port: 2424,
     username: 'root',
     password: 'root',
+    useToken: true,
 });
 
 const db = serv.use({
-    name: 'movieRatings',
-    username: 'root',
-    password: 'root'
+    name: 'MovieRatings',
+    username: 'admin',
+    password: 'admin'
 });
-console.log(db)
 
 module.exports = db;
 
